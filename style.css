@@ -1,1 +1,334 @@
-/* Add your CSS here */
+
+/* Reset and base styles for consistent appearance across browsers */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Make sure the html element also has the theme background */
+html {
+  background: var(--bg-primary);
+  min-height: 100%;
+  transition: background 0.3s ease;
+}
+
+/* CSS Variables for light and dark themes */
+:root {
+  /* Light theme colors */
+  --bg-primary: linear-gradient(135deg, #0066cc 0%, #004499 50%, #002266 100%);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --text-primary: #333;
+  --text-secondary: #555;
+  --text-light: #666;
+  --accent-color: #0066cc;
+  --border-color: rgba(0, 102, 204, 0.2);
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-heavy: rgba(0, 0, 0, 0.25);
+  --circuit-lines: rgba(255, 255, 255, 0.1);
+  --circuit-dots-1: rgba(255, 255, 255, 0.2);
+  --circuit-dots-2: rgba(255, 255, 255, 0.15);
+  /* Hero section background */
+  --hero-bg: linear-gradient(135deg, rgba(0, 102, 204, 0.9) 0%, rgba(0, 68, 153, 0.8) 50%, rgba(0, 34, 102, 0.9) 100%);
+}
+
+/* Dark theme colors */
+[data-theme="dark"] {
+  --bg-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  --bg-card: rgba(30, 41, 59, 0.95);
+  --text-primary: #e2e8f0;
+  --text-secondary: #cbd5e1;
+  --text-light: #94a3b8;
+  --accent-color: #3b82f6;
+  --border-color: rgba(59, 130, 246, 0.3);
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --shadow-heavy: rgba(0, 0, 0, 0.6);
+  --circuit-lines: rgba(59, 130, 246, 0.2);
+  --circuit-dots-1: rgba(59, 130, 246, 0.3);
+  --circuit-dots-2: rgba(59, 130, 246, 0.25);
+  /* Hero section background for dark mode */
+  /* --hero-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 50%, rgba(51, 65, 85, 0.9) 100%); */
+}
+
+/* Body styling with computer chip-inspired background */
+body {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  /* Computer chip circuit pattern background */
+  background: var(--bg-primary);
+  background-image: 
+    /* Circuit lines - horizontal */
+    linear-gradient(90deg, var(--circuit-lines) 1px, black 1px),
+    linear-gradient(0deg, var(--circuit-lines) 1px, black 1px),
+    /* Circuit dots pattern */
+    radial-gradient(circle at 25% 25%, var(--circuit-dots-1) 2px, var(--accent-color) 2px),
+    radial-gradient(circle at 75% 75%, var(--circuit-dots-2) 1px, rgb(0, 0, 0) 1px);
+  background-color: var(--bg-primary);
+  background-size: 50px 50px, 50px 50px, 100px 100px, 80px 80px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Container for main content with padding */
+.main-content {
+  padding: 20px;
+  padding-top: 0;
+}
+
+/* Dark mode toggle button */
+#dark-mode-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--shadow-medium);
+  z-index: 10;
+}
+
+#dark-mode-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px var(--shadow-heavy);
+}
+
+/* Show/hide sun and moon icons based on theme */
+[data-theme="light"] #dark-mode-toggle .moon-icon {
+  display: none;
+}
+
+[data-theme="dark"] #dark-mode-toggle .sun-icon {
+  display: none;
+}
+
+/* Header section styling - Full width hero */
+header {
+  text-align: center;
+  /* Full width hero with gradient background */
+  background: var(--hero-bg);
+  /* Add technology-themed background pattern */
+  background-image: 
+    var(--hero-bg),
+    /* Subtle tech pattern overlay */
+    linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
+  background-size: cover, 20px 20px, 20px 20px;
+  
+  padding: 80px 20px;
+  margin: 0;
+  margin-bottom: 40px;
+  /* Remove border radius for full width effect */
+  border-radius: 0;
+  box-shadow: 0 4px 20px var(--shadow-medium);
+  position: relative;
+  transition: all 0.3s ease;
+  
+  /* Make sure content is above background */
+  z-index: 1;
+}
+
+/* Add a subtle overlay for better text readability */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+
+/* Intel logo styling */
+header img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Main heading styling */
+header h1 {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 2.5em;
+  color: white;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.5px;
+}
+
+/* Header description text */
+header p {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* Timeline section styling */
+section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 30px;
+  /* Allow flexible heights */
+  align-items: flex-start;
+}
+
+/* Individual timeline cards */
+section div {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 25px;
+  width: 300px;
+  box-shadow: 0 8px 25px var(--shadow-medium);
+  /* Smooth hover effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  /* Chip-inspired border */
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect for cards */
+section div:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px var(--shadow-heavy);
+  border-color: var(--accent-color);
+}
+
+/* Year headings (h2) */
+section div h2 {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 2em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+/* Event title headings (h3) */
+section div h3 {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 1.3em;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+/* Images in cards */
+section div img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  /* Subtle shadow for depth */
+  box-shadow: 0 4px 10px var(--shadow-light);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Card description text */
+section div p {
+  font-size: 0.95em;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  /* Hide description by default */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  /* Smooth animation for reveal */
+  transition: opacity 0.4s ease, max-height 0.4s ease, margin-top 0.4s ease;
+  margin-top: 0;
+}
+
+/* Show description on card hover */
+section div:hover p {
+  opacity: 1;
+  max-height: 200px; /* Adjust based on your content */
+  margin-top: 15px;
+}
+
+/* Bottom instruction text */
+body > p:last-child {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 1.1em;
+  margin-top: 30px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 30px auto 0;
+  transition: all 0.3s ease;
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] section div img {
+  opacity: 0.9;
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] section div img:hover {
+  opacity: 1;
+}
+
+[data-theme="dark"] body > p:last-child {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--text-light);
+}
+
+/* Mobile responsiveness for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust header for mobile */
+  header {
+    padding: 60px 20px;
+  }
+  
+  header h1 {
+    font-size: 2em;
+  }
+  
+  header p {
+    font-size: 1em;
+  }
+  
+  /* Stack cards vertically on mobile */
+  section {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  section div {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  /* Reduce main content padding on mobile */
+  .main-content {
+    padding: 10px;
+  }
+  
+  /* Adjust dark mode toggle for mobile */
+  #dark-mode-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 10px 16px;
+    font-size: 1em;
+  }
+}
