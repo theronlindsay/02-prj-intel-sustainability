@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap CSS with RTL support -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="ltr">
 
   <!-- Header / Hero Section -->
   <header>
@@ -19,6 +24,12 @@
       <button id="dark-mode-toggle" aria-label="Toggle dark mode">
         <span class="sun-icon">☀️</span>
         <span class="moon-icon">🌙</span>
+      </button>
+      
+      <!-- Language toggle button -->
+      <button id="language-toggle" aria-label="Toggle language">
+        <span class="lang-en">EN</span>
+        <span class="lang-ar">عر</span>
       </button>
       
       <!-- Ask Copilot to teach you about `.svg` 🙂 -->
@@ -39,95 +50,176 @@
 
   <!-- Main content wrapper -->
   <div class="main-content">
-    <!-- Timeline Cards Section -->
-    <section>
+    <!-- Bootstrap Container for three-column layout -->
+    <div class="container-fluid">
+      <div class="row">
+        
+        <!-- Left Column -->
+        <div class="col-lg-3 col-md-4 mb-4">
+          <div class="p-3 bg-light rounded shadow-sm">
+            <h4 class="text-primary" data-content="quick-facts">Quick Facts</h4>
+            <!-- Quick facts about Intel's sustainability journey -->
+            <ul class="list-unstyled">
+              <li data-content="founded"><strong>Founded:</strong> 1968</li>
+              <li data-content="net-zero-goal"><strong>Net-Zero Goal:</strong> 2040</li>
+              <li data-content="renewable-energy"><strong>Renewable Energy:</strong> 99% (2023)</li>
+              <li data-content="peak-emissions"><strong>Peak Emissions:</strong> 2006</li>
+            </ul>
+          </div>
+          
+          <div class="p-3 bg-light rounded shadow-sm mt-3">
+            <h5 class="text-primary" data-content="key-initiatives">Key Initiatives</h5>
+            <!-- Key sustainability initiatives -->
+            <div class="small">
+              <div class="initiative-section">
+                <p data-content="rise-strategy"><strong>RISE Strategy:</strong> Under its RISE (Responsible, Inclusive, Sustainable, Enabling) strategy, Intel sets ambitious 2030 goals, including driving industry-wide progress on climate action, water stewardship, and waste reduction.</p>
+                <div class="learn-more-container">
+                  <button class="learn-more-btn btn btn-outline-primary btn-sm" data-content="rise-learn-more">Learn More</button>
+                </div>
+              </div>
+              
+              <div class="initiative-section">
+                <p data-content="commitment"><strong>Commitment:</strong> In 2022, Intel pledged to achieve net-zero greenhouse gas emissions (Scope 1 and 2) by 2040. This commitment builds on decades of environmental initiatives and partnerships across the semiconductor industry.</p>
+                <div class="learn-more-container">
+                  <button class="learn-more-btn btn btn-outline-primary btn-sm" data-content="commitment-learn-more">Learn More</button>
+                </div>
+              </div>
+              
+              <div class="initiative-section">
+                <p data-content="water-waste"><strong>Water & Waste:</strong> Intel conserves billions of gallons of water annually and collaborates with local communities to restore watersheds. Intel also upcycles and recycles materials to reduce waste and advance a circular economy.</p>
+                <div class="learn-more-container">
+                  <button class="learn-more-btn btn btn-outline-primary btn-sm" data-content="water-waste-learn-more">Learn More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Center Column - Timeline -->
+        <div class="col-lg-6 col-md-8">
+          <!-- Timeline Cards Section -->
+          <section>
 
     <!-- Card 1: 1968 -->
-    <div>
+    <div data-year="1968" class="timeline-card">
       <h2>1968</h2>
       <h3>Intel Founded</h3>
-      <img src="img/1.jpg" alt="Placeholder Image" />
+      <img src="img/1.jpg" alt="Representative image" />
       <p>
         Robert Noyce and Gordon Moore rename the newly formed company 
-        NM Electronics to Intel Corporation, laying the foundation for 
-        decades of technological innovation.
+        NM Electronics to Intel Corporation, laying the foundation 
+        for decades of technological innovation.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>Intel Founded</h3>
+        <p>Robert Noyce and Gordon Moore rename the newly formed company NM Electronics to Intel Corporation, laying the foundation for decades of technological innovation.</p>
+      </div>
     </div>
 
     <!-- Card 2: 1971 -->
-    <div>
+    <div data-year="1971" class="timeline-card">
       <h2>1971</h2>
       <h3>First Microprocessor</h3>
-      <img src="img/2.jpg" alt="Placeholder Image" />
+      <img src="img/2.jpg" alt="Representative image" />
       <p>
         Intel debuts the 4004, the world's first commercial microprocessor, 
         igniting the microprocessor revolution and propelling the future 
         of computing devices.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>First Microprocessor</h3>
+        <p>Intel debuts the 4004, the world's first commercial microprocessor, igniting the microprocessor revolution and propelling the future of computing devices.</p>
+      </div>
     </div>
 
     <!-- Card 3: 1978 -->
-    <div>
+    <div data-year="1978" class="timeline-card">
       <h2>1978</h2>
       <h3>8086 Processor</h3>
-      <img src="img/3.jpg" alt="Placeholder Image" />
+      <img src="img/3.jpg" alt="Representative image" />
       <p>
         Launch of the 8086 processor, establishing the x86 architecture 
         that drives countless PCs and servers in the modern era.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>8086 Processor</h3>
+        <p>Launch of the 8086 processor, establishing the x86 architecture that drives countless PCs and servers in the modern era.</p>
+      </div>
     </div>
 
     <!-- Card 4: 1985 -->
-    <div>
+    <div data-year="1985" class="timeline-card">
       <h2>1985</h2>
       <h3>386 Processor</h3>
-      <img src="img/4.jpg" alt="Placeholder Image" />
+      <img src="img/4.jpg" alt="Representative image" />
       <p>
         Intel introduces the 386 processor with 32-bit architecture, 
-        ushering in a new era of performance and multitasking for 
-        personal computers.
+        ushering in a new era of performance and multitasking 
+        for personal computers.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>386 Processor</h3>
+        <p>Intel introduces the 386 processor with 32-bit architecture, ushering in a new era of performance and multitasking for personal computers.</p>
+      </div>
     </div>
 
     <!-- Card 5: 2006 -->
-    <div>
+    <div data-year="2006" class="timeline-card">
       <h2>2006</h2>
       <h3>Peak GHG Emissions</h3>
       <img src="img/emissions.png" alt="Industrial emissions and factory smokestacks" />
       <p>
         This year marks Intel's highest annual greenhouse gas emissions 
         for operations. Over subsequent years, Intel invests heavily in 
-        chemical abatement, renewable energy, and energy-efficient 
-        manufacturing to reverse this trend.
+        chemical abatement, renewable energy, and energy-efficient manufacturing to reverse this trend.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>Peak GHG Emissions</h3>
+        <p>This year marks Intel's highest annual greenhouse gas emissions for operations. Over subsequent years, Intel invests heavily in chemical abatement, renewable energy, and energy-efficient manufacturing to reverse this trend.</p>
+      </div>
     </div>
 
     <!-- Card 6: 2020 -->
-    <div>
+    <div data-year="2020" class="timeline-card">
       <h2>2020</h2>
       <h3>RISE Strategy</h3>
       <img src="img/rise.png" alt="Business strategy and planning meeting" />
       <p>
         Intel launches its RISE (Responsible, Inclusive, Sustainable, 
-        Enabling) strategy and 2030 goals, aiming to drive industry-wide 
-        progress on climate action, water stewardship, and waste reduction.
+        Enabling) strategy and 2030 goals, aiming to drive industry-wide progress 
+        on climate action, water stewardship, and waste reduction.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>RISE Strategy</h3>
+        <p>Intel launches its RISE (Responsible, Inclusive, Sustainable, Enabling) strategy and 2030 goals, aiming to drive industry-wide progress on climate action, water stewardship, and waste reduction.</p>
+      </div>
     </div>
 
     <!-- Card 7: 2022 -->
-    <div>
+    <div data-year="2022" class="timeline-card">
       <h2>2022</h2>
       <h3>Net-Zero By 2040</h3>
       <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=250&h=150&fit=crop" alt="Green energy and environmental sustainability" />
       <p>
-        Intel announces its commitment to achieve net-zero greenhouse 
-        gas emissions (Scope 1 and 2) across its global operations 
+        Intel announces its commitment to achieve net-zero greenhouse gas emissions 
+        (Scope 1 and 2) across its global operations 
         by 2040, building on years of environmental initiatives.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>Net-Zero By 2040</h3>
+        <p>Intel announces its commitment to achieve net-zero greenhouse gas emissions (Scope 1 and 2) across its global operations by 2040, building on years of environmental initiatives.</p>
+      </div>
     </div>
 
     <!-- Card 8: 2023 -->
-    <div>
+    <div data-year="2023" class="timeline-card">
       <h2>2023</h2>
       <h3>Renewable Electricity</h3>
       <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=250&h=150&fit=crop" alt="Solar panels and renewable energy infrastructure" />
@@ -136,10 +228,15 @@
         helping to drastically lower carbon emissions and driving progress 
         toward Intel's long-term sustainability goals.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>Renewable Electricity</h3>
+        <p>The company achieves 99% renewable electricity usage worldwide, helping to drastically lower carbon emissions and driving progress toward Intel's long-term sustainability goals.</p>
+      </div>
     </div>
 
     <!-- Card 9: 2024 -->
-    <div>
+    <div data-year="2024" class="timeline-card">
       <h2>2024</h2>
       <h3>Sustainability Summit</h3>
       <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=250&h=150&fit=crop" alt="Business conference and collaboration meeting" />
@@ -148,13 +245,388 @@
         government officials, and industry leaders to collaborate on 
         next-generation sustainable semiconductor manufacturing.
       </p>
+      <!-- Text overlay for hover/click -->
+      <div class="text-overlay">
+        <h3>Sustainability Summit</h3>
+        <p>Intel hosts its first Sustainability Summit, uniting suppliers, government officials, and industry leaders to collaborate on next-generation sustainable semiconductor manufacturing.</p>
+      </div>
     </div>
     </section>
-    <p>Website: Theron Lindsay</p>
+        </div>
+        <!-- End Center Column -->
+        
+        <!-- Right Column -->
+        <div class="col-lg-3 col-md-12 mb-4">
+          
+          <div class="p-3 bg-light rounded shadow-sm mt-3">
+            <h5 class="text-primary" data-content="impact-numbers">Impact Numbers</h5>
+            <!-- Key sustainability metrics -->
+            <div class="text-center">
+              <div class="mb-2">
+                <div class="h4 text-success" data-content="ghg-number">50%</div>
+                <small data-content="ghg-reduction">Reduction in GHG emissions since 2006</small>
+              </div>
+              <div class="mb-2">
+                <div class="h4 text-info" data-content="renewable-number">99%</div>
+                <small data-content="renewable-usage">Renewable electricity usage</small>
+              </div>
+              <div class="mb-2">
+                <div class="h4 text-warning" data-content="net-zero-number">2040</div>
+                <small data-content="net-zero-target">Net-zero target year</small>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Newsletter Subscription Section -->
+          <div class="p-3 bg-light rounded shadow-sm mt-3">
+            <h5 class="text-primary" data-content="stay-updated">Stay Updated</h5>
+            <!-- Newsletter subscription form -->
+            <p class="small mb-3" data-content="newsletter-desc">Get the latest updates on Intel's sustainability journey and innovations.</p>
+            <form class="newsletter-form">
+              <div class="mb-3">
+                <label for="email" class="form-label small" data-content="email-label">Email address</label>
+                <input type="email" class="form-control form-control-sm" id="email" data-content="email-input" placeholder="Enter your email" required>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-sm" data-content="subscribe-btn">Subscribe to Newsletter</button>
+              </div>
+            </form>
+            <small class="text-muted" data-content="privacy-notice">We respect your privacy. Unsubscribe anytime.</small>
+          </div>
+        </div>
+        <!-- End Right Column -->
+        
+      </div>
+      <!-- End Bootstrap Row -->
+    </div>
+    <!-- End Bootstrap Container -->
   </div>
+
+  <!-- Simple Footer -->
+  <footer class="bg-light text-center py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p class="mb-2" data-content="website-by">Website: Theron Lindsay</p>
+          <p class="small mb-0" data-content="copyright">
+            © 2024 Intel Corporation. This educational project showcases Intel's sustainability timeline.
+          </p>
+          <div class="mt-2">
+            <small class="text-muted">
+              <a href="#" class="text-decoration-none me-3" data-content="privacy-policy">Privacy Policy</a>
+              <a href="#" class="text-decoration-none me-3" data-content="terms-of-service">Terms of Service</a>
+              <a href="#" class="text-decoration-none" data-content="contact-us">Contact Us</a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- Dark Mode JavaScript -->
   <script>
+    // Language content data
+    const languageContent = {
+      en: {
+        title: "Intel: Sustainability Through the Ages",
+        darkModeLabel: "Toggle dark mode",
+        langToggleLabel: "Toggle language",
+        mainHeading: "Sustainability Through the Ages",
+        subHeading: "Explore Intel's journey through time, discovering how our commitment to innovation has shaped a more sustainable future for technology and our planet.",
+        quickFacts: "Quick Facts",
+        founded: "Founded",
+        netZeroGoal: "Net-Zero Goal",
+        renewableEnergy: "Renewable Energy",
+        peakEmissions: "Peak Emissions",
+        keyInitiatives: "Key Initiatives",
+        riseStrategy: "RISE Strategy",
+        riseDesc: "Under its RISE (Responsible, Inclusive, Sustainable, Enabling) strategy, Intel sets ambitious 2030 goals, including driving industry-wide progress on climate action, water stewardship, and waste reduction.",
+        commitment: "Commitment",
+        commitmentDesc: "In 2022, Intel pledged to achieve net-zero greenhouse gas emissions (Scope 1 and 2) by 2040. This commitment builds on decades of environmental initiatives and partnerships across the semiconductor industry.",
+        waterWaste: "Water & Waste",
+        waterWasteDesc: "Intel conserves billions of gallons of water annually and collaborates with local communities to restore watersheds. Intel also upcycles and recycles materials to reduce waste and advance a circular economy.",
+        learnMore: "Learn More",
+        riseLearnMore: "Learn More",
+        commitmentLearnMore: "Learn More", 
+        waterWasteLearnMore: "Learn More",
+        sustainabilityReport: "Sustainability Report",
+        climateAction: "Climate Action",
+        innovationHub: "Innovation Hub",
+        impactNumbers: "Impact Numbers",
+        ghgReduction: "Reduction in GHG emissions since 2006",
+        ghgNumber: "50%",
+        renewableUsage: "Renewable electricity usage",
+        renewableNumber: "99%",
+        netZeroTarget: "Net-zero target year",
+        netZeroNumber: "2040",
+        stayUpdated: "Stay Updated",
+        newsletterDesc: "Get the latest updates on Intel's sustainability journey and innovations.",
+        emailLabel: "Email address",
+        emailPlaceholder: "Enter your email",
+        subscribeBtn: "Subscribe to Newsletter",
+        privacyNotice: "We respect your privacy. Unsubscribe anytime.",
+        subscribedMsg: "Subscribed! ✓",
+        websiteBy: "Website: Theron Lindsay",
+        copyright: "© 2024 Intel Corporation. This educational project showcases Intel's sustainability timeline.",
+        privacyPolicy: "Privacy Policy",
+        termsOfService: "Terms of Service",
+        contactUs: "Contact Us",
+        timeline: {
+          1968: {
+            title: "Intel Founded",
+            desc: "Robert Noyce and Gordon Moore rename the newly formed company NM Electronics to Intel Corporation, laying the foundation for decades of technological innovation."
+          },
+          1971: {
+            title: "First Microprocessor",
+            desc: "Intel debuts the 4004, the world's first commercial microprocessor, igniting the microprocessor revolution and propelling the future of computing devices."
+          },
+          1978: {
+            title: "8086 Processor",
+            desc: "Launch of the 8086 processor, establishing the x86 architecture that drives countless PCs and servers in the modern era."
+          },
+          1985: {
+            title: "386 Processor",
+            desc: "Intel introduces the 386 processor with 32-bit architecture, ushering in a new era of performance and multitasking for personal computers."
+          },
+          2006: {
+            title: "Peak GHG Emissions",
+            desc: "This year marks Intel's highest annual greenhouse gas emissions for operations. Over subsequent years, Intel invests heavily in chemical abatement, renewable energy, and energy-efficient manufacturing to reverse this trend."
+          },
+          2020: {
+            title: "RISE Strategy",
+            desc: "Intel launches its RISE (Responsible, Inclusive, Sustainable, Enabling) strategy and 2030 goals, aiming to drive industry-wide progress on climate action, water stewardship, and waste reduction."
+          },
+          2022: {
+            title: "Net-Zero By 2040",
+            desc: "Intel announces its commitment to achieve net-zero greenhouse gas emissions (Scope 1 and 2) across its global operations by 2040, building on years of environmental initiatives."
+          },
+          2023: {
+            title: "Renewable Electricity",
+            desc: "The company achieves 99% renewable electricity usage worldwide, helping to drastically lower carbon emissions and driving progress toward Intel's long-term sustainability goals."
+          },
+          2024: {
+            title: "Sustainability Summit",
+            desc: "Intel hosts its first Sustainability Summit, uniting suppliers, government officials, and industry leaders to collaborate on next-generation sustainable semiconductor manufacturing."
+          }
+        }
+      },
+      ar: {
+        title: "إنتل: الاستدامة عبر العصور",
+        darkModeLabel: "تبديل الوضع المظلم",
+        langToggleLabel: "تبديل اللغة",
+        mainHeading: "الاستدامة عبر العصور",
+        subHeading: "استكشف رحلة إنتل عبر الزمن، واكتشف كيف شكل التزامنا بالابتكار مستقبلاً أكثر استدامة للتكنولوجيا وكوكبنا.",
+        quickFacts: "حقائق سريعة",
+        founded: "التأسيس",
+        netZeroGoal: "هدف الحياد الكربوني",
+        renewableEnergy: "الطاقة المتجددة",
+        peakEmissions: "ذروة الانبعاثات",
+        keyInitiatives: "المبادرات الرئيسية",
+        riseStrategy: "استراتيجية RISE",
+        riseDesc: "في إطار استراتيجية RISE (المسؤولة، الشاملة، المستدامة، الممكنة)، تضع إنتل أهدافاً طموحة لعام ٢٠٣٠، تشمل قيادة التقدم على مستوى الصناعة في العمل المناخي، إدارة المياه، وتقليل النفايات.",
+        commitment: "الالتزام",
+        commitmentDesc: "في عام ٢٠٢٢، تعهدت إنتل بتحقيق صافي انبعاثات صفر من غازات الدفيئة (النطاق ١ و ٢) بحلول عام ٢٠٤٠. يبني هذا الالتزام على عقود من المبادرات البيئية والشراكات عبر صناعة أشباه الموصلات.",
+        waterWaste: "المياه والنفايات",
+        waterWasteDesc: "تحافظ إنتل على مليارات الجالونات من المياه سنوياً وتتعاون مع المجتمعات المحلية لاستعادة مستجمعات المياه. كما تقوم إنتل بإعادة تدوير المواد وإعادة استخدامها لتقليل النفايات وتعزيز الاقتصاد الدائري.",
+        learnMore: "اعرف المزيد",
+        riseLearnMore: "تعرف على المزيد",
+        commitmentLearnMore: "تعرف على المزيد",
+        waterWasteLearnMore: "تعرف على المزيد",
+        sustainabilityReport: "تقرير الاستدامة",
+        climateAction: "العمل المناخي",
+        innovationHub: "مركز الابتكار",
+        impactNumbers: "أرقام التأثير",
+        ghgReduction: "تقليل انبعاثات غازات الدفيئة منذ ٢٠٠٦",
+        ghgNumber: "٥٠٪",
+        renewableUsage: "استخدام الكهرباء المتجددة",
+        renewableNumber: "٩٩٪",
+        netZeroTarget: "سنة الهدف للحياد الكربوني",
+        netZeroNumber: "٢٠٤٠",
+        stayUpdated: "ابق على اطلاع",
+        newsletterDesc: "احصل على آخر التحديثات حول رحلة إنتل في الاستدامة والابتكارات.",
+        emailLabel: "عنوان البريد الإلكتروني",
+        emailPlaceholder: "أدخل بريدك الإلكتروني",
+        subscribeBtn: "اشترك في النشرة الإخبارية",
+        privacyNotice: "نحن نحترم خصوصيتك. يمكنك إلغاء الاشتراك في أي وقت.",
+        subscribedMsg: "تم الاشتراك! ✓",
+        websiteBy: "الموقع: ثيرون ليندسي",
+        copyright: "© 2024 شركة إنتل. هذا المشروع التعليمي يعرض جدول إنتل الزمني للاستدامة.",
+        privacyPolicy: "سياسة الخصوصية",
+        termsOfService: "شروط الخدمة",
+        contactUs: "اتصل بنا",
+        timeline: {
+          1968: {
+            title: "تأسيس إنتل",
+            desc: "روبرت نويس وغوردون مور يعيدان تسمية الشركة المشكلة حديثاً NM Electronics إلى شركة إنتل، مما يرسي الأساس لعقود من الابتكار التكنولوجي."
+          },
+          1971: {
+            title: "أول معالج دقيق",
+            desc: "إنتل تطرح 4004، أول معالج دقيق تجاري في العالم، مما يشعل ثورة المعالجات الدقيقة ويدفع مستقبل أجهزة الحاسوب."
+          },
+          1978: {
+            title: "معالج 8086",
+            desc: "إطلاق معالج 8086، مما يؤسس معمارية x86 التي تشغل عدداً لا يحصى من أجهزة الكمبيوتر والخوادم في العصر الحديث."
+          },
+          1985: {
+            title: "معالج 386",
+            desc: "إنتل تقدم معالج 386 بمعمارية 32 بت، مما يفتح عصراً جديداً من الأداء ومعالجة المهام المتعددة لأجهزة الكمبيوتر الشخصية."
+          },
+          2006: {
+            title: "ذروة انبعاثات غازات الدفيئة",
+            desc: "تشهد هذه السنة أعلى انبعاثات سنوية لغازات الدفيئة للعمليات في إنتل. خلال السنوات التالية، تستثمر إنتل بكثافة في تقليل المواد الكيميائية، الطاقة المتجددة، والتصنيع الموفر للطاقة لعكس هذا الاتجاه."
+          },
+          2020: {
+            title: "استراتيجية RISE",
+            desc: "إنتل تطلق استراتيجية RISE (المسؤولة، الشاملة، المستدامة، الممكنة) وأهداف ٢٠٣٠، بهدف قيادة التقدم على مستوى الصناعة في العمل المناخي، إدارة المياه، وتقليل النفايات."
+          },
+          2022: {
+            title: "صافي الصفر بحلول ٢٠٤٠",
+            desc: "إنتل تعلن التزامها بتحقيق صافي انبعاثات صفر من غازات الدفيئة (النطاق ١ و ٢) عبر عملياتها العالمية بحلول ٢٠٤٠، بناء على سنوات من المبادرات البيئية."
+          },
+          2023: {
+            title: "الكهرباء المتجددة",
+            desc: "الشركة تحقق ٩٩٪ من استخدام الكهرباء المتجددة حول العالم، مما يساعد في تقليل انبعاثات الكربون بشكل كبير ويدفع التقدم نحو أهداف إنتل طويلة المدى للاستدامة."
+          },
+          2024: {
+            title: "قمة الاستدامة",
+            desc: "إنتل تستضيف أول قمة للاستدامة، جامعة الموردين، المسؤولين الحكوميين، وقادة الصناعة للتعاون في التصنيع المستدام للجيل القادم من أشباه الموصلات."
+          }
+        }
+      }
+    };
+
+    // Language detection and management
+    function detectSystemLanguage() {
+      // Always default to English for this educational project
+      // This makes it more accessible for international students
+      return 'en';
+      
+      // Note: Original logic below (commented out for reference)
+      // const browserLang = navigator.language || navigator.userLanguage;
+      // if (browserLang.startsWith('ar')) {
+      //   return 'ar';
+      // }
+      // return 'en';
+    }
+
+    function updatePageLanguage(lang) {
+      const content = languageContent[lang];
+      const html = document.documentElement;
+      const body = document.body;
+      
+      // Update HTML attributes
+      html.setAttribute('lang', lang);
+      html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      
+      // Update body class
+      if (lang === 'ar') {
+        body.classList.add('rtl');
+        body.classList.remove('ltr');
+      } else {
+        body.classList.add('ltr');
+        body.classList.remove('rtl');
+      }
+      
+      // Update page title
+      document.title = content.title;
+      
+      // Update aria labels
+      document.getElementById('dark-mode-toggle').setAttribute('aria-label', content.darkModeLabel);
+      document.getElementById('language-toggle').setAttribute('aria-label', content.langToggleLabel);
+      
+      // Update main content
+      document.querySelector('header h1').textContent = content.mainHeading;
+      document.querySelector('header p').textContent = content.subHeading;
+      
+      // Update left column
+      document.querySelector('[data-content="quick-facts"]').textContent = content.quickFacts;
+      const foundedYear = lang === 'ar' ? '١٩٦٨' : '1968';
+      const netZeroYear = lang === 'ar' ? '٢٠٤٠' : '2040';
+      const renewablePercent = lang === 'ar' ? '٩٩٪ (٢٠٢٣)' : '99% (2023)';
+      const peakYear = lang === 'ar' ? '٢٠٠٦' : '2006';
+      
+      document.querySelector('[data-content="founded"]').innerHTML = `<strong>${content.founded}:</strong> ${foundedYear}`;
+      document.querySelector('[data-content="net-zero-goal"]').innerHTML = `<strong>${content.netZeroGoal}:</strong> ${netZeroYear}`;
+      document.querySelector('[data-content="renewable-energy"]').innerHTML = `<strong>${content.renewableEnergy}:</strong> ${renewablePercent}`;
+      document.querySelector('[data-content="peak-emissions"]').innerHTML = `<strong>${content.peakEmissions}:</strong> ${peakYear}`;
+      
+      document.querySelector('[data-content="key-initiatives"]').textContent = content.keyInitiatives;
+      document.querySelector('[data-content="rise-strategy"]').innerHTML = `<strong>${content.riseStrategy}:</strong> ${content.riseDesc}`;
+      document.querySelector('[data-content="commitment"]').innerHTML = `<strong>${content.commitment}:</strong> ${content.commitmentDesc}`;
+      document.querySelector('[data-content="water-waste"]').innerHTML = `<strong>${content.waterWaste}:</strong> ${content.waterWasteDesc}`;
+      
+      // Update button text separately
+      document.querySelector('[data-content="rise-learn-more"]').textContent = content.riseLearnMore;
+      document.querySelector('[data-content="commitment-learn-more"]').textContent = content.commitmentLearnMore;
+      document.querySelector('[data-content="water-waste-learn-more"]').textContent = content.waterWasteLearnMore;
+      
+      // Re-attach event listeners to new buttons after language change
+      attachLearnMoreEventListeners();
+      
+      // Update timeline cards
+      Object.keys(content.timeline).forEach(year => {
+        const yearDisplay = lang === 'ar' ? convertToArabicNumerals(year) : year;
+        const card = document.querySelector(`[data-year="${year}"]`);
+        if (card) {
+          card.querySelector('h2').textContent = yearDisplay;
+          card.querySelector('h3').textContent = content.timeline[year].title;
+          card.querySelector('p').textContent = content.timeline[year].desc;
+          
+          // Update overlay content as well
+          const overlay = card.querySelector('.text-overlay');
+          if (overlay) {
+            overlay.querySelector('h3').textContent = content.timeline[year].title;
+            overlay.querySelector('p').textContent = content.timeline[year].desc;
+          }
+        }
+      });
+      
+      // Update right column
+      document.querySelector('[data-content="impact-numbers"]').textContent = content.impactNumbers;
+      document.querySelector('[data-content="ghg-reduction"]').textContent = content.ghgReduction;
+      document.querySelector('[data-content="ghg-number"]').textContent = content.ghgNumber;
+      document.querySelector('[data-content="renewable-usage"]').textContent = content.renewableUsage;
+      document.querySelector('[data-content="renewable-number"]').textContent = content.renewableNumber;
+      document.querySelector('[data-content="net-zero-target"]').textContent = content.netZeroTarget;
+      document.querySelector('[data-content="net-zero-number"]').textContent = content.netZeroNumber;
+      
+      // Update newsletter section
+      document.querySelector('[data-content="stay-updated"]').textContent = content.stayUpdated;
+      document.querySelector('[data-content="newsletter-desc"]').textContent = content.newsletterDesc;
+      document.querySelector('[data-content="email-label"]').textContent = content.emailLabel;
+      document.querySelector('[data-content="email-input"]').setAttribute('placeholder', content.emailPlaceholder);
+      document.querySelector('[data-content="subscribe-btn"]').textContent = content.subscribeBtn;
+      document.querySelector('[data-content="privacy-notice"]').textContent = content.privacyNotice;
+      
+      // Update footer
+      document.querySelector('[data-content="website-by"]').textContent = content.websiteBy;
+      document.querySelector('[data-content="copyright"]').textContent = content.copyright;
+      document.querySelector('[data-content="privacy-policy"]').textContent = content.privacyPolicy;
+      document.querySelector('[data-content="terms-of-service"]').textContent = content.termsOfService;
+      document.querySelector('[data-content="contact-us"]').textContent = content.contactUs;
+      
+      // Update language toggle icons
+      const langEn = document.querySelector('.lang-en');
+      const langAr = document.querySelector('.lang-ar');
+      if (lang === 'ar') {
+        langEn.style.display = 'inline';
+        langAr.style.display = 'none';
+      } else {
+        langEn.style.display = 'none';
+        langAr.style.display = 'inline';
+      }
+    }
+
+    function convertToArabicNumerals(num) {
+      const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+      return num.toString().replace(/\d/g, (d) => arabicNumerals[d]);
+    }
+
+    // Initialize language system
+    const savedLanguage = localStorage.getItem('language');
+    const systemLanguage = detectSystemLanguage();
+    const currentLanguage = savedLanguage || systemLanguage;
+
     // Check for saved dark mode preference or default to system preference
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -179,14 +651,155 @@
       document.documentElement.setAttribute('data-theme', newTheme);
       // Save user preference
       localStorage.setItem('theme', newTheme);
+      
+      // Update Bootstrap sidebar styling based on theme
+      updateBootstrapTheme(newTheme);
+    });
+    
+    // Function to update Bootstrap components for dark mode
+    function updateBootstrapTheme(theme) {
+      const sidebarElements = document.querySelectorAll('.bg-light');
+      sidebarElements.forEach(element => {
+        if (theme === 'dark') {
+          element.classList.remove('bg-light');
+          element.classList.add('bg-dark', 'text-light');
+        } else {
+          element.classList.remove('bg-dark', 'text-light');
+          element.classList.add('bg-light');
+        }
+      });
+    }
+    
+    // Initialize theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      updateBootstrapTheme(currentTheme);
     });
     
     // Listen for system theme changes and respect them if user hasn't set a preference
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
       if (!localStorage.getItem('theme')) {
-        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        const newTheme = e.matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        updateBootstrapTheme(newTheme);
       }
     });
+    
+    // Newsletter form functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize language on page load
+      updatePageLanguage(currentLanguage);
+      
+      // Language toggle functionality
+      const languageToggle = document.getElementById('language-toggle');
+      languageToggle.addEventListener('click', function() {
+        const currentLang = document.documentElement.getAttribute('lang');
+        const newLang = currentLang === 'ar' ? 'en' : 'ar';
+        
+        // Update page language
+        updatePageLanguage(newLang);
+        
+        // Save user preference
+        localStorage.setItem('language', newLang);
+      });
+      
+      // Add mobile click functionality for timeline cards
+      const timelineCards = document.querySelectorAll('.timeline-card');
+      
+      // Add click event listeners to timeline cards for mobile interaction
+      timelineCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          // Only handle clicks on touch devices (mobile/tablet)
+          // Check if device has hover capability - if not, it's likely touch-only
+          if (window.matchMedia('(hover: none)').matches) {
+            e.preventDefault();
+            
+            // Remove active class from all other cards
+            timelineCards.forEach(otherCard => {
+              if (otherCard !== card) {
+                otherCard.classList.remove('active');
+              }
+            });
+            
+            // Toggle active class on clicked card
+            card.classList.toggle('active');
+          }
+        });
+      });
+      
+      // Close overlay when clicking outside cards on mobile
+      document.addEventListener('click', function(e) {
+        // Only on touch devices
+        if (window.matchMedia('(hover: none)').matches) {
+          const clickedCard = e.target.closest('.timeline-card');
+          
+          // If click was outside any timeline card, close all overlays
+          if (!clickedCard) {
+            timelineCards.forEach(card => {
+              card.classList.remove('active');
+            });
+          }
+        }
+      });
+      
+      const newsletterForm = document.querySelector('.newsletter-form');
+      
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault(); // Prevent actual form submission
+          
+          const emailInput = document.getElementById('email');
+          const submitButton = newsletterForm.querySelector('button[type="submit"]');
+          const originalButtonText = submitButton.textContent;
+          const currentLang = document.documentElement.getAttribute('lang');
+          const successMsg = languageContent[currentLang].subscribedMsg;
+          
+          // Simple email validation
+          if (emailInput.value && emailInput.checkValidity()) {
+            // Show success feedback
+            submitButton.textContent = successMsg;
+            submitButton.classList.remove('btn-primary');
+            submitButton.classList.add('btn-success');
+            
+            // Reset form after 2 seconds
+            setTimeout(() => {
+              emailInput.value = '';
+              submitButton.textContent = originalButtonText;
+              submitButton.classList.remove('btn-success');
+              submitButton.classList.add('btn-primary');
+            }, 2000);
+          } else {
+            // Show error feedback
+            emailInput.classList.add('is-invalid');
+            setTimeout(() => {
+              emailInput.classList.remove('is-invalid');
+            }, 3000);
+          }
+        });
+      }
+    });
+
+    // Learn More button functionality - disabled (buttons do nothing)
+    function attachLearnMoreEventListeners() {
+      // Get all Learn More buttons
+      const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
+      
+      // Add click event to each button that does nothing
+      learnMoreButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          // Buttons are disabled - they do nothing when clicked
+          // This is to prevent any functionality while keeping the visual appearance
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Attach event listeners on initial page load
+      attachLearnMoreEventListeners();
+    });
   </script>
+  
+  <!-- Bootstrap JavaScript Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

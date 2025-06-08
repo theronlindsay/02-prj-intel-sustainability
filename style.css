@@ -1,4 +1,3 @@
-
 /* Reset and base styles for consistent appearance across browsers */
 * {
   margin: 0;
@@ -94,11 +93,112 @@ body {
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px var(--shadow-medium);
   z-index: 10;
+  min-width: 70px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #dark-mode-toggle:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px var(--shadow-heavy);
+}
+
+/* Language toggle button - positioned next to dark mode toggle */
+#language-toggle {
+  position: absolute;
+  top: 20px;
+  right: 110px; /* Better spacing from dark mode toggle */
+  background: var(--accent-color);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--shadow-medium);
+  z-index: 10;
+  min-width: 70px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#language-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px var(--shadow-heavy);
+  filter: brightness(1.1);
+}
+
+/* Language toggle icons */
+.lang-en, .lang-ar {
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Keep language toggle in same position for both RTL and LTR */
+.rtl #language-toggle {
+  right: 110px; /* Keep in same position regardless of layout with better spacing */
+  left: auto;
+}
+
+/* Mobile responsiveness for language toggle */
+@media (max-width: 991px) {
+  #dark-mode-toggle {
+    padding: 10px 16px;
+    min-width: 60px;
+    height: 45px;
+    font-size: 1.1em;
+  }
+  
+  #language-toggle {
+    right: 85px; /* Better spacing from dark mode toggle on mobile */
+    padding: 10px 16px;
+    font-size: 0.9em;
+    min-width: 60px;
+    height: 45px;
+  }
+  
+  .rtl #language-toggle {
+    right: 85px; /* Keep in same position regardless of layout */
+    left: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  #dark-mode-toggle {
+    right: 15px;
+    top: 15px;
+    padding: 8px 12px;
+    min-width: 50px;
+    height: 40px;
+    font-size: 1em;
+  }
+  
+  #language-toggle {
+    right: 75px; /* Better spacing for small screens */
+    top: 15px;
+    padding: 8px 12px;
+    font-size: 0.8em;
+    min-width: 50px;
+    height: 40px;
+  }
+  
+  .rtl #language-toggle {
+    right: 75px; /* Keep in same position regardless of layout */
+    left: auto;
+  }
+  
+  .rtl #dark-mode-toggle {
+    right: 15px; /* Keep in same position regardless of layout */
+    left: auto;
+  }
 }
 
 /* Show/hide sun and moon icons based on theme */
@@ -202,13 +302,27 @@ section div {
   border: 1px solid var(--border-color);
   position: relative;
   overflow: hidden;
+  cursor: pointer; /* Make cards clickable */
+  /* Ensure consistent height calculation for overlay */
+  box-sizing: border-box;
 }
 
-/* Hover effect for cards */
-section div:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px var(--shadow-heavy);
-  border-color: var(--accent-color);
+/* Hover effect for cards - only apply transform on devices without hover capability */
+/* On devices with hover (desktop), we skip the transform to avoid overlay alignment issues */
+@media (hover: none) {
+  section div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px var(--shadow-heavy);
+    border-color: var(--accent-color);
+  }
+}
+
+/* On hover devices (desktop), only apply shadow and border changes, no transform */
+@media (hover: hover) {
+  section div:hover {
+    box-shadow: 0 15px 40px var(--shadow-heavy);
+    border-color: var(--accent-color);
+  }
 }
 
 /* Year headings (h2) */
@@ -243,25 +357,84 @@ section div img {
   transition: box-shadow 0.3s ease;
 }
 
-/* Card description text */
-section div p {
+/* Card description text - hide only the main card text, not overlay text */
+section div > p {
   font-size: 0.95em;
   color: var(--text-secondary);
   line-height: 1.5;
-  /* Hide description by default */
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  /* Smooth animation for reveal */
-  transition: opacity 0.4s ease, max-height 0.4s ease, margin-top 0.4s ease;
-  margin-top: 0;
+  margin-top: 15px;
+  /* Hide the description text on the card itself (but not in overlay) */
+  display: none;
 }
 
-/* Show description on card hover */
-section div:hover p {
+/* Text overlay for hover/click effect */
+/* This creates a dark overlay that appears over timeline cards */
+section div .text-overlay {
+  /* Position the overlay to cover the entire card exactly */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Dark background with some transparency */
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 20px;
+  
+  /* Center the text content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  /* Start hidden, will show on hover or click */
+  opacity: 0;
+  visibility: hidden;
+  
+  /* Smooth transition when showing/hiding */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  
+  /* Make sure overlay appears above other content */
+  z-index: 2;
+  
+  /* Ensure overlay respects box model */
+  box-sizing: border-box;
+  
+  /* Prevent any margin/padding issues */
+  margin: 0;
+}
+
+/* Show overlay on hover for desktop devices */
+/* This only works on devices that support hover (desktop/laptop) */
+@media (hover: hover) {
+  section div:hover .text-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Show overlay when clicked for mobile/touch devices */
+/* The 'active' class is added by JavaScript when user taps on mobile */
+section div.active .text-overlay {
   opacity: 1;
-  max-height: 200px; /* Adjust based on your content */
-  margin-top: 15px;
+  visibility: visible;
+}
+
+/* Style the text content inside the overlay */
+section div .text-overlay h3 {
+  color: white !important;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+}
+
+section div .text-overlay p {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1em;
+  line-height: 1.4;
+  margin: 0;
+  display: block !important; /* Force the overlay text to show */
 }
 
 /* Bottom instruction text */
@@ -293,42 +466,278 @@ body > p:last-child {
   color: var(--text-light);
 }
 
-/* Mobile responsiveness for smaller screens */
-@media (max-width: 768px) {
-  /* Adjust header for mobile */
-  header {
-    padding: 60px 20px;
+/* Newsletter subscription form styling */
+.newsletter-form {
+  margin-bottom: 10px;
+}
+
+.newsletter-form .form-control {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.newsletter-form .form-control:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+  background: white;
+}
+
+/* Dark mode newsletter form */
+[data-theme="dark"] .newsletter-form .form-control {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .newsletter-form .form-control:focus {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: var(--accent-color);
+}
+
+[data-theme="dark"] .newsletter-form .form-control::placeholder {
+  color: var(--text-light);
+}
+
+/* Primary button styling */
+.btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px var(--shadow-medium);
+  filter: brightness(1.1);
+}
+
+/* Learn More button styling - simple and beginner-friendly */
+.learn-more-btn {
+  /* Make the button look nice with rounded corners */
+  border-radius: 15px;
+  /* Add some space inside the button */
+  padding: 4px 12px;
+  /* Make the text smaller than normal buttons */
+  font-size: 0.75rem;
+  /* Add smooth animation when hovering */
+  transition: all 0.3s ease;
+  /* Make the button stand out a bit */
+  font-weight: 500;
+  /* Remove default margins since we're using a container */
+  margin: 0;
+}
+
+/* Container for Learn More buttons - positions them to the right */
+.learn-more-container {
+  /* Align the button to the right */
+  text-align: right;
+  /* Add some space above the button */
+  margin-top: 8px;
+  /* Add space below each section */
+  margin-bottom: 12px;
+}
+
+/* For RTL languages, align buttons to the left */
+.rtl .learn-more-container {
+  text-align: left;
+}
+
+/* Style each initiative section for better spacing */
+.initiative-section {
+  /* Add space between sections */
+  margin-bottom: 15px;
+}
+
+/* Last initiative section doesn't need bottom margin */
+.initiative-section:last-child {
+  margin-bottom: 0;
+}
+
+/* When someone hovers over the Learn More button */
+.learn-more-btn:hover {
+  /* Move the button up slightly */
+  transform: translateY(-2px);
+  /* Add a nice shadow effect */
+  box-shadow: 0 4px 12px var(--shadow-medium);
+  /* Make the colors slightly brighter */
+  filter: brightness(1.1);
+}
+
+/* Footer styling - improved for better readability */
+footer {
+  background: var(--bg-card) !important;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-primary);
+  margin-top: 40px;
+  /* Add more padding for better spacing */
+  padding: 30px 15px !important;
+  /* Improve text readability */
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Make footer text more readable */
+footer .small {
+  /* Make small text in footer slightly bigger */
+  font-size: 0.9rem !important;
+  /* Improve contrast by making text darker/lighter */
+  color: var(--text-secondary);
+  /* Add better spacing between lines */
+  line-height: 1.5;
+}
+
+/* Style footer links for better visibility */
+footer a {
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+  /* Make links stand out more */
+  font-weight: 500;
+  /* Add underline for better accessibility */
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: var(--accent-color);
+  filter: brightness(1.2);
+  /* Remove underline on hover for cleaner look */
+  text-decoration: none;
+}
+
+/* Dark mode footer with better contrast */
+[data-theme="dark"] footer {
+  background: var(--bg-card) !important;
+  color: var(--text-primary);
+  /* Add a subtle border for better separation in dark mode */
+  border-top: 2px solid var(--border-color);
+}
+
+/* Improve dark mode footer text readability */
+[data-theme="dark"] footer .small {
+  /* Make text brighter in dark mode for better readability */
+  color: var(--text-secondary);
+}
+
+/* Bootstrap integration and RTL support */
+
+/* Enable RTL support when needed - add this class to body for RTL languages */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Additional RTL support for Arabic text */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Ensure proper RTL layout for Bootstrap components */
+.rtl .me-3 {
+  margin-right: 0 !important;
+  margin-left: 1rem !important;
+}
+
+/* Fix button positioning in RTL */
+.rtl .btn-outline-primary,
+.rtl .btn-primary {
+  text-align: center;
+}
+
+/* Timeline section RTL adjustments */
+.rtl section {
+  direction: rtl;
+}
+
+.rtl section div {
+  text-align: right;
+}
+
+.rtl section div h2,
+.rtl section div h3 {
+  text-align: right;
+}
+
+/* Header RTL adjustments */
+.rtl header {
+  direction: rtl;
+  text-align: center;
+}
+
+/* Footer RTL adjustments */
+.rtl footer {
+  direction: rtl;
+  text-align: center;
+}
+
+/* Keep dark mode toggle in same position for both RTL and LTR */
+.rtl #dark-mode-toggle {
+  right: 20px; /* Keep in same position regardless of layout */
+  left: auto;
+}
+
+/* Mobile RTL adjustments */
+@media (max-width: 991px) {
+  .rtl #dark-mode-toggle {
+    right: 10px; /* Keep in same position regardless of layout */
+    left: auto;
+  }
+}
+
+/* Mobile responsiveness for Bootstrap layout */
+@media (max-width: 991px) {
+  .container-fluid {
+    padding: 0 10px;
   }
   
-  header h1 {
-    font-size: 2em;
+  .col-md-8 {
+    order: 1;
   }
   
-  header p {
-    font-size: 1em;
+  .col-lg-3:first-child {
+    order: 2;
   }
   
-  /* Stack cards vertically on mobile */
-  section {
-    flex-direction: column;
-    align-items: center;
+  .col-lg-3:last-child {
+    order: 3;
   }
   
-  section div {
-    width: 100%;
-    max-width: 350px;
+  /* Move newsletter to bottom on mobile */
+  .col-lg-3:last-child {
+    order: 3;
+    margin-top: 20px;
   }
   
-  /* Reduce main content padding on mobile */
-  .main-content {
-    padding: 10px;
+  /* Stack newsletter form elements better on mobile */
+  .newsletter-form .form-control {
+    margin-bottom: 10px;
   }
   
-  /* Adjust dark mode toggle for mobile */
-  #dark-mode-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 10px 16px;
-    font-size: 1em;
+  /* Footer adjustments for mobile */
+  footer {
+    text-align: center;
+  }
+  
+  footer .small a {
+    display: block;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Make newsletter section full width on small screens */
+  .col-lg-3 .p-3 {
+    padding: 15px !important;
+  }
+  
+  /* Adjust footer for very small screens */
+  footer {
+    padding: 20px 10px !important;
+  }
+  
+  footer .small a {
+    font-size: 12px;
   }
 }
